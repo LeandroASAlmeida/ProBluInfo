@@ -1,0 +1,114 @@
+{% block body_content %}
+
+
+<!doctype html>
+<html lang="pt-br" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1651/1651769.png" >
+    <link rel="stylesheet" href="../static/css/style_login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column">
+                <img src="../static/img/logo_completa.png" alt="some text" width=240   height=240>
+                <button id="signin" class="btn btn-primary">MODULO GESTÃO</button>
+            </div>    
+            <div class="second-column">
+                <h2 class="title title-second">Sistema PDV</h2>
+                <div class="social-media">
+                    <ul class="list-social-media">
+                        <a class="link-social-media" href="https://github.com/Juliano-Formigari" target="_blank" title="Juliano">
+                            <li class="item-social-media">
+                                <i class="fab fa-github"></i>       
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="https://github.com/Edson-Padilha" target="_blank" title="Edson">
+                            <li class="item-social-media">
+                                <i class="fab fa-github"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="https://github.com/LeandroASAlmeida" target="_blank" title="Leandro">
+                            <li class="item-social-media">
+                                <i class="fab fa-github"></i>
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <form class="form" method="POST" autocomplete="off" action="{% url 'login-view' %}">{% csrf_token %}
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input type="text" id="login" name="login"  placeholder="Login" class="form-control" maxlength="30" required autofocus>
+                    </label>
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" placeholder="Senha" required> 
+                        <input type="hidden" name="setor" value="pdv">  
+                    </label>
+                    <a class="password" href="recup-senha">Esqueceu sua Senha?</a>
+                   <button class="btn btn-second" type="submit">Fazer Login</button><br>
+                   {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == erro %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </form>
+            </div>
+        </div>
+        <div class="content second-content">
+            <div class="first-column">
+                <img src="../static/img/logo_completa.png" alt="some text" width=240   height=240>
+                <button id="signup" class="btn btn-primary">MÓDULO PDV</button>
+            </div>
+            <div class="second-column">
+                <h2 class="title title-second">Sistema Gestão</h2>
+                <div class="social-media">
+                    <ul class="list-social-media">
+                        <a class="link-social-media" href="https://github.com/Juliano-Formigari" target="_blank" title="Juliano">
+                            <li class="item-social-media">
+                                <i class="fab fa-github"></i>       
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="https://github.com/Edson-Padilha" target="_blank" title="Edson">
+                            <li class="item-social-media">
+                                <i class="fab fa-github"></i>
+                            </li>
+                        </a>
+                        <a class="link-social-media" href="https://github.com/LeandroASAlmeida" target="_blank" title="Leandro">
+                            <li class="item-social-media">
+                                <i class="fab fa-github"></i>
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <form class="form" method="POST" autocomplete="off" action="{% url 'login-view' %}">{% csrf_token %}
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input type="text" id="login" name="login"  placeholder="Login" class="form-control" maxlength="30" required autofocus>
+                    </label>
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" placeholder="Senha" required> 
+                        <input type="hidden" name="setor" value="gestao"> 
+                    </label>
+                    <a class="password" href="recup-senha">Esqueceu sua Senha?</a>
+                    <button class="btn btn-second" type="submit">Fazer Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/app.js"></script>
+</body>
+</html>
+{% endblock %}  

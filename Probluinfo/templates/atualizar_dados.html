@@ -1,0 +1,116 @@
+{% extends 'base_pbi.html' %}
+
+{% block conteudo %}
+
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Atualizar Meus Dados {{ request.user.first_name }} </label>
+            </h3>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="first_name">Primeiro nome</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ pessoas.first_name }}" maxlength="100" placeholder="Digite seu nome completo" required />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Segundo nome</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ pessoas.last_name }}" maxlength="100" placeholder="Digite seu nome completo" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="dt_nascimento">Data de nascimento</label>
+                <input type="date" class="form-control" id="dt_nascimento" name="dt_nascimento" value={{ data_nas }} placeholder="dd/mm/aaaa" required />  
+            </div>
+            <div class="form-group col-md-3">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" value="{{ pessoas.cpf  }}" maxlength="14" placeholder="000.000.000-00" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="celular">Celular</label>
+                <input type="tel" class="form-control" id="celular" name="celular" value="{{ pessoas.celular }}" placeholder="(00) 00000-0000" />         
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" maxlength="50" value="{{ pessoas.email  }}" placeholder="Digite seu e-mail" />         
+            </div>
+            <div class="form-group col-md-6">
+                <label for="nm_resp">Responsável</label>
+                <input type="text" class="form-control" id="nm_resp" name="nm_resp" maxlength="100" value="{{ pessoas.nm_resp  }}" placeholder="Digite o nome do responsável" disabled />       
+            </div>
+            <div class="form-group col-md-6">
+                <label for="fone_res">Telefone do Responsável</label>
+                <input type="tel" class="form-control" id="fone_res" name="fone_res" maxlength="100" value="{{ pessoas.fone_res  }}" placeholder="(00) 00000-0000" disabled />       
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="id_perfil">
+                        Perfil
+                        <span style="color: red;">*</span></label>
+                    <select class="form-control" name="id_perfil" id="id_perfil">
+                            <option value="0">Selecione o tipo</option>
+                        {% for perfil in perfis %}
+                            <option value="{{ perfil.id }}" {% if perfil.id == pessoas.id_perfil_id %}selected{% endif %}>{{ perfil.descricao }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="is_active">
+                        Ativo?
+                        <span style="color: red;">*</span></label>
+                        <select class="form-control" name="is_active" id="is_active">
+                        {% if pessoas.is_active %}
+                            <option value="True">Ativo</option>
+                            <option value="False">Inativo</option>
+                        {% else %}
+                            <option value="False">Inativo</option>
+                            <option value="True">Ativo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        {% include 'acoes_form.html' %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == erro %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+</div>
+
+    {% load static %}
+    <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.mask.js' %}"></script>
+    
+    <script>
+        $(document).ready(function () {
+        $('#cpf').mask('000.000.000-00');
+        $('#celular').mask('(00) 00000-0000');
+        $('#fone_res').mask('(00) 00000-0000');
+        
+        $('#dt_nascimento').blur(function(){
+                var anoDeNascimento = new Date($(this).val()).getFullYear();
+                var anoAtual = new Date().getFullYear();
+                var idade = anoAtual - anoDeNascimento;
+                
+                if(idade > 18  || isNaN(idade)){
+                    $('#nm_resp').prop('disabled',true);
+                    $('#fone_res').prop('disabled',true);
+                }else{
+                    $('#nm_resp').prop('disabled',false);
+                    $('#fone_res').prop('disabled',false);
+                }
+            })        
+        });
+    </script>
+{% endblock %}

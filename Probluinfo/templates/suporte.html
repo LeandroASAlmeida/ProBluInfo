@@ -1,0 +1,41 @@
+{% extends 'base_pbi.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST" class="form-group" action="">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <div><h4>Contato e Suporte</h4></div>
+            </div>
+        </div>
+        <form class="form-control">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome.." required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail.." required>
+            </div>
+            <div class="mb-3">
+                <label for="mensagem" class="form-label">Mensagem</label>
+                <textarea class="form-control" id="mensagem" name="mensagem" rows="3" required></textarea>
+            </div>
+            <div class="d-flex my-3 justify-content-around">
+                <input class="btn btn-primary" type="submit" value="Enviar">
+                <input class="btn btn-secondary" type="reset" value="Cancelar" onclick="window.history.back()">
+            </div>
+        </form>
+    </form>
+</div>
+{% endblock %}

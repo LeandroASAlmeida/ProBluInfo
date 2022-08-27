@@ -1,0 +1,44 @@
+{% extends 'base_pbi.html' %}
+
+{% block conteudo %}
+<div class="container bg-light back02">
+    <form method="POST" class="form-group" name="cursos_form" >
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <div>
+                    <h4> Cadastrar Cursos </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="nm_curso">Nome do Curso</label>
+                <input type="text" class="form-control"  id="nm_curso" name="nm_curso" maxlength="100" required placeholder="Nome do curso" required/>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="carga_horaria">Carga Horária</label>
+                <input type="text" min="0" class="form-control"  id="carga_horaria" name="carga_horaria"  maxlength="10" placeholder="Carga horária" required/>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="vl_curso">Valor do Curso - R$ </label>
+                <input type="text" class="form-control" min="0" id="vl_curso" name="vl_curso"  title="casa decimal deve ser separada por ponto"  maxlength="10" placeholder="R$0000,00" required/>         
+            </div>
+        </div>
+        {% include 'acoes_form.html' %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == erro %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
+
+

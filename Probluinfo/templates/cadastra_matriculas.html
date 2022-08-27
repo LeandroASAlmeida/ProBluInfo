@@ -1,0 +1,65 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="POST" class="form-group" name="matriculas_form" >
+        {% csrf_token %}
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <div><h4>Cadatrar Matriculas</h4></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="id">ID </label>
+                <input type="text" class="form-control" id="id" name="id" maxlength="100" placeholder="Digite a ID da Matricula" required />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="dt_inicio">Data de Inicio </label>
+                <input type="date" class="form-control" id="dt_inicio" placeholder="dd/mm/aaaa" required name="dt_inicio"  maxlength="10" />   
+            </div>
+            <div class="form-group col-md-3">
+                <label for="dt_fim">Data de Fim </label>
+                <input type="date" class="form-control" id="dt_fim" placeholder="dd/mm/aaaa" required name="dt_fim"  maxlength="10" placeholder="Digite a ID do Aluno" />       
+            </div>
+            <div class="form-group col-md-3">
+                <label for="qtd_dias">Quantidade de Dias</label>
+                <input type="text" class="form-control" id="qtd_dias" name="qtd_dias" maxlength="14" placeholder=" Quantidade de dias"  />  
+            </div>
+            <div class="form-group col-md-3">
+                <label for="qtd_horas">Quantidade de Horas</label>
+                <input type="text" class="form-control" id="qtd_horas" name="qtd_horas" maxlength="14" placeholder="Quantidade de horas" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="periodo">Periodo</label>
+                <span style="color: red;">*</span></label>
+                <div class="form-group col-md-10">
+                    <label for="perfil">
+                    <select class="form-control" name="periodo" id="periodo">
+                            <option value="0">Selecione o Periodo</option>
+                        {% for periodo in periodos %}
+                            <option value="{{ periodo.0 }}">{{ periodo.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="id_pessoa_id">Aluno ID</label>
+                <input type="text" class="form-control" id="id_pessoa_id" name="id_pessoa_id" maxlength="14" placeholder="Digite a ID do Aluno" />    
+            </div>
+            <div class="form-group col-md-3">
+                <label for="id_curso_id">Curso ID</label>
+                <input type="text" class="form-control" id="id_curso_id" name="id_curso_id" maxlength="14" placeholder="Digite a ID do Curso" />       
+            </div>
+            <div class="form-group col-md-3">
+                <label for="id_sala_id">Sala ID</label>
+                <input type="text" class="form-control" id="id_sala_id" name="id_sala_id" maxlength="14" placeholder="Digite a ID da Sala" /> 
+            </div>
+        </div>
+        {% include 'acoes_form.html' %}
+    </div>
+    </form>
+    
+</div>
+{% endblock %}

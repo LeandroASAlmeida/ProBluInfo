@@ -1,0 +1,49 @@
+{% extends 'base_pbi.html' %}
+{% load static %}
+
+{% block conteudo %}
+<div class="container bg-light back02">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST" class="form-group" action="">
+        {% csrf_token %}
+      <div class="row">
+            <div class="col col-5">
+                <div class="form-group">
+                    <label for="old_password">Senha atual<span style="color: red;">*</span></label>
+                    <input type="password" class="form-control" id="old_password" name="{{form.old_password.name}}" required autofocus>
+                    <p class="errorlist">{{ form.errors.old_password }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="new_password1">Senha nova<span style="color: red;">*</span></label>
+                    <input type="password" class="form-control" id="new_password1" name="{{form.new_password1.name}}"  required>
+                    <small id="password-help" class="form-text text-muted">
+                    </small>
+                    <p class="errorlist">{{ form.errors.new_password1 }}</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="new_password2">Repita a senha nova<span style="color: red;">*</span></label>
+                    <input type="password" class="form-control" id="new_password2" name="{{form.new_password2.name}}" required>
+                    <p class="errorlist">{{ form.errors.new_password2 }}</p>
+                </div>
+            </div>
+        </div> 
+
+        {% include 'acoes_form_altera.html' %}
+            
+        </div>
+    </form>
+</div>
+{% endblock %}

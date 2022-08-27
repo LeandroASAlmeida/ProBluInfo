@@ -1,0 +1,47 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Alteração de Curso {{ cursos.nm_curso }} </label>
+            </h3>
+        </div>
+        <div class="mb-3">
+            <label for="nm_curso" class="form-label">Nome</label>
+            <input type="text" class="form-control" name="nm_curso" value="{{ cursos.nm_curso }}" id="nm_curso" maxlength="50"  required>
+        </div>
+        <div class="mb-3">
+            <label for="carga_horaria" class="form-label">Carga Horaria</label>
+            <input type="text" class="form-control" name="carga_horaria" value="{{ cursos.carga_horaria }}" id="carga_horaria" required>
+        </div>
+        <div class="mb-3">
+            <label for="vl_curso" class="form-label">Valor do Curso</label>
+            <input type="text" class="form-control" name="vl_curso" value="{{ cursos.vl_curso }}" id="vl_curso" maxlength="50" required>
+        </div>
+        {% include 'acoes_form_altera.html' %}
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Alterar registro</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente alterar <strong>{{ cursos.nm_curso }}</strong>?
+                </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Alterar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+   
+
+{% endblock %}

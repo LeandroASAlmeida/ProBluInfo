@@ -1,0 +1,68 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div><h4> Lista de Matriculas </h4></div>
+        </div>
+    </div>
+    {% include 'form_pesquisa.html' %}
+    <div class="container mt-4">
+        {% if total > 0 %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Data Inicio</th>
+                    <th>data Fim</th>
+                    <th>Qtd Dias</th>
+                    <th>Qtd Horas</th>
+                    <th>Periodo</th>
+                    <th>ID Curso</th>
+                    <th>ID Pessoa</th>
+                    <th>ID Sala</th>
+                    <th>Ativo</th>
+                    <th class="text-center">Alterar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for matricula in porPagina %}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ dt_inicio }}</td>
+                    <td>{{ dt_fim }}</td>
+                    <td>{{ qtd_dias }}</td>
+                    <td>{{ qtd_horas }}</td>
+                    <td>{{ periodo }}</td>
+                    <td>{{ id_curso_id }}</td>
+                    <td>{{ id_pessoa_id }}</td>
+                    <td>{{ id_sala_id }}</td>
+                    <td>{% if tipo.is_active %}
+                        🟢
+                    {% else %}
+                        🔴  
+                    {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-info" onclick="location.href='{% url 'altera-matriculas'  id=matricula.id %}'">✏</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <label>Total de registros: {{ total }}</label>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        {% include 'paginacao.html' %}
+        {% elif procura %}
+            {% include 'sem_registro_encontrado.html' %}
+        {% else %}
+            {% include 'sem_item_cadastrado.html' %}
+        {% endif %}
+    </div>
+{% endblock %}

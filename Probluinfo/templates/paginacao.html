@@ -1,0 +1,10 @@
+<div class="text-center">
+    {% if porPagina.has_previous %}
+        <a href="?pagina={{ porPagina.previous_page_number }}">Anterior</a>
+    {% endif %}
+    {{ porPagina.number }} de {{ porPagina.paginator.num_pages }}
+
+    {% if porPagina.has_next %}
+        <a href="?pagina={{ porPagina.next_page_number }}">Próxima</a>
+    {% endif %}
+</div>

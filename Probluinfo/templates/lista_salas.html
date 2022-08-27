@@ -1,0 +1,48 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div><h4> Lista de Salas </h4></div>
+        </div>
+    </div>
+    {% include 'form_pesquisa.html' %}
+    <div class="container mt-4">
+        {% if total > 0 %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome da Sala</th>
+                    <th>Capacidade</th>
+                    <th class="text-center">Alterar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sala in porPagina %}
+                <tr>
+                    <td>{{ sala.id }}</td>
+                    <td>{{ sala.nm_sala }}</td>
+                    <td>{{ sala.capacidade }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-info" onclick="location.href='{% url 'altera-salas'  id=sala.id %}'">✏</button>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <label>Total de registros: {{ total }}</label>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        {% include 'paginacao.html' %}
+        {% elif procura %}
+            {% include 'sem_registro_encontrado.html' %}
+        {% else %}
+            {% include 'sem_item_cadastrado.html' %}
+        {% endif %}
+    </div>
+{% endblock %}

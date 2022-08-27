@@ -1,0 +1,43 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Alteração de Salas {{ salas.nm_sala }} </label>
+            </h3>
+        </div>
+        <div class="mb-3">
+            <label for="nm_sala" class="form-label">Nome da Sala</label>
+            <input type="text" class="form-control" name="nm_sala" value="{{ salas.nm_sala }}" id="nm_sala" maxlength="50" required>
+        </div>
+        <div class="mb-3">
+            <label for="capacidade" class="form-label">Capacidade</label>
+            <input type="text" class="form-control" name="capacidade" value="{{ salas.capacidade }}" id="capacidade" maxlength="50" required>
+        </div>
+        {% include 'acoes_form_altera.html' %}
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Alterar registro</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente alterar <strong>{{ salas.nm_sala }}</strong>?
+                </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Alterar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+   
+
+{% endblock %}

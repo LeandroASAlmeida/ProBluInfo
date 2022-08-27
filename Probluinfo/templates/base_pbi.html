@@ -1,0 +1,65 @@
+<!-- MODULO GESTAO-->
+{% load static %}
+<!doctype html>
+<html lang="pt-br" class="h-100">
+<head>
+    {% block titulo %}<title>ProBluInfo</title>{% endblock %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icones -->
+    <link href="{% static 'img/favi.ico' %}" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Css Bootstrap e Manual -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% if request.session.base == "pdv" %}
+        <link rel="stylesheet" href="{% static 'css/pbi_pdv.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'css/pbi_gestao.css' %}">
+    {% endif %}
+        <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    
+    <!-- Javascript Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <main role="main" class="flex-shrink-0">
+        <!-- Bloco com o menu principal -->
+        {% if request.session.base == "pdv" %}
+            {% include "nav_pdv.html" %}
+        {% else %}
+            {% include "nav_gestao.html" %}
+        {% endif %}
+        <!-- Bloco de conteúdo -->
+        <div class="container py-5">
+        {% block conteudo %}
+
+        {% if request.session.base == "pdv" %}
+            BEM VINDO AO MODULO PDV
+        {% else %}
+            BEM VINDO AO MODULO GESTÃO
+        {% endif %}
+        | Logado como: <b>{{ request.user.id_perfil.descricao }}</b>
+        {% endblock %}
+            
+        </div>
+    </main>
+    <footer class="mt-auto">
+        <!-- Rodapé -->
+        <div class="container-fluid bg-light text-center p-3">
+            <div class="row">
+                <div class="col-md-4 mx-auto text-center">
+                    <img src="{% static 'img/logo.png' %}" height="68" class="float-left" alt="">
+                    <p>
+                        <span class="lead">PROBLUINFO</span><br>
+                        <span>Desenvolvido pela Equipe SuperDev2021</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

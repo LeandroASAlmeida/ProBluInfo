@@ -1,0 +1,68 @@
+
+/* 
+CSS do pbi pdv
+*/
+.bg-pbi {
+    background-color: #E4C981;
+}
+
+.text-pbi {
+    color: #E4C981;
+}
+
+.border-pbi {
+    border-color: #E4C981;
+}
+.bg-pbi-escuro {
+    background-color: #332a11;
+}
+
+.text-pbi-escuro {
+    color: #332a11;
+}
+
+.border-pbi-escuro {
+    border-color: #332a11;
+}
+
+
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child::before,
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child::before {
+    top: 15px !important;
+}
+
+
+.navbar {
+    padding: 0 !important;
+}
+
+.navbars{
+    padding-left: 10px;
+}
+
+.navbar-brand{
+    padding-left: 0.5px;
+}
+
+.navbar a.nav-link{
+    color: black !important;
+}
+
+.navbar .nav-item{
+    padding: 3px 5px;
+}
+
+.navbar .nav-item:hover{
+    background-color: #f0dfb0;
+}
+
+
+.alert dl, .alert ol, .alert ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+table td{
+    max-width: 500px;
+}

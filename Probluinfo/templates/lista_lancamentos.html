@@ -1,0 +1,63 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div><h4> Lista de Lançamentos </h4></div>
+        </div>
+    </div>
+    {% include 'form_pesquisa.html' %}
+    <div class="container mt-4">
+        {% if total > 0 %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data lançamento</th>
+                    <th>Id Pessoa</th>
+                    <th>Ativo</th>
+                    <th class="text-center">Alterar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lancamento in porPagina %}
+                <tr>
+                    <td>{{ tipo.id }}</td>
+                    <td>{{ tipo.tipo }}</td>
+                    <td>{{ tipo.descricao }}</td>
+                    <td>{{ tipo.valor }}</td>
+                    <td>{{ tipo.dt_lancamento }}</td>
+                    <td>{{ tipo.id_pessoa_id }}</td>
+                    <td>{% if tipo.is_active %}
+                        🟢
+                    {% else %}
+                        🔴  
+                    {% endif %}
+                    </td>
+                    
+                    <td class="text-center">
+                        <button class="btn btn-info" onclick="location.href='{% url 'altera-lancamentos'  id=lancamento.id %}'">✏</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <label>Total de registros: {{ total }}</label>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        {% include 'paginacao.html' %}
+        {% elif procura %}
+            {% include 'sem_registro_encontrado.html' %}
+        {% else %}
+            {% include 'sem_item_cadastrado.html' %}
+        {% endif %}
+    </div>
+{% endblock %}

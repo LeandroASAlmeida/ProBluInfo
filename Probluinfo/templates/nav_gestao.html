@@ -1,0 +1,93 @@
+{% load static  %}
+
+<nav class="navbar navbar-expand-lg bg-pbi font-115 shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand mx-5 my-1" href="{% url 'base-pbi' %}">
+            <img class="logo_small" src="{% static 'img/logo.png' %}" width="40" height="40" alt="logo" >
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-users me-2" aria-hidden="true"></i>Pessoas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'cadastra-pessoas' %}">Cadastrar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lista-pessoas' %}">Listar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-usd me-2" aria-hidden="true"></i>Financeiro
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'cadastra-lancamentos' %}">Cadastrar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lista-lancamentos' %}">Listar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-pencil me-2" aria-hidden="true"></i>Cursos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'cadastra-cursos' %}">Cadastrar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lista-cursos' %}">Listar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-book me-2" aria-hidden="true"></i>Salas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'cadastra-salas' %}">Cadastrar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lista-salas' %}">Listar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-calculator me-2" aria-hidden="true"></i>Notas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'cadastra-notas' %}">Cadastrar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lista-notas' %}">Listar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-address-card me-2" aria-hidden="true"></i>Matriculas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'cadastra-matriculas' %}">Cadastrar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'lista-matriculas' %}">Listar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+     
+        <div class="d-flex justify-content-center">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa fa-user-circle me-2" aria-hidden="true"></i><span id="login">Bem Vindo {{ request.user.first_name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{% url 'suporte' %}"><i class="fa fa-question-circle me-2" aria-hidden="true"></i>Suporte</a></li>
+                            <li><a class="dropdown-item" href="{% url 'atualizar-dados' %}"><i class="fa fa-user me-2" aria-hidden="true"></i>Meus dados</a></li>
+                            <li><a class="dropdown-item" href="{%url 'altera-senha'%}"><i class="fa fa-lock me-2" aria-hidden="true"></i>Alterar senha</a></li>
+                            <li><a class="dropdown-item" href="{%url 'sobre'%}"><i class="fa fa-thumbs-up me-2" aria-hidden="true"></i>Sobre</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out me-2" aria-hidden="true"></i>Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

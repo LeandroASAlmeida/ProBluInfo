@@ -1,0 +1,61 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Alteração de Notas {{ notas.id }} </label>
+            </h3>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" class="form-control" name="id" value="{{ notas.id }}" id="id" maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="nota_1 " class="form-label">Nota 1</label>
+            <input type="text" class="form-control" name="nota_1" value="{{ notas.nota_1 }}" id="nota_1   " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="nota_2" class="form-label">Nota 2</label>
+            <input type="date" class="form-control" name="nota_2" value="{{ notas.nota_2 }}" id="nota_2   " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="nota_3" class="form-label">Nota 3</label>
+            <input type="text" class="form-control" name="nota_3" value="{{ notas.nota_3 }}" id="nota_3   " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="nota_4" class="form-label">Nota 4</label>
+            <input type="text" class="form-control" name="nota_4" value="{{ notas.nota_4 }}" id="nota_4   " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="media" class="form-label">Media</label>
+            <input type="text" class="form-control" name="media" value="{{ notas.media }}" id="media   " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id_matricula_id " class="form-label">Id Matricula</label>
+            <input type="text" class="form-control" name="id_matricula_id " value="{{ notas.id_matricula_id }}" id="id_matricula_id " maxlength="50"  required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="is_active">
+                Ativo?
+                <span style="color: red;">*</span></label>
+                <select class="form-control" name="is_active" id="is_active">
+                {% if pessoas.is_active %}
+                    <option value="True">Ativo</option>
+                    <option value="False">Inativo</option>
+                {% else %}
+                    <option value="False">Inativo</option>
+                    <option value="True">Ativo</option>
+                {% endif %}
+            </select>
+        </div>
+        
+        {% include 'acoes_form_altera.html' %}
+        
+    </form>
+</div>
+   
+
+{% endblock %}

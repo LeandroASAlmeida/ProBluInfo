@@ -1,0 +1,67 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back2s">
+    <div class="form-row">
+        <div class="form-group col-md-6 mt-4">
+            <div><h4> Lista de Pessoas </h4></div>
+        </div>
+    </div>
+    {% include 'form_pesquisa.html' %}
+    <div class="container mt-4">
+        {% if total > 0 %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Ativo</th>
+                    {% comment %} <th>Fone Resp</th> {% endcomment %}
+                    {% comment %} <th>Nome Resp</th> {% endcomment %}
+                    {% comment %} <th>Login</th> {% endcomment %}
+                    <th>Perfil</th>
+                    <th class="text-center">Alterar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tipo in porPagina %}
+                <tr>
+                    <td>{{ tipo.id }}</td>
+                    <td>{{ tipo.first_name }} {{ tipo.last_name }}</td>
+                    <td>{{ tipo.cpf }}</td>
+                    <td>{{ tipo.email }}</td>
+                    
+                    <td>{% if tipo.is_active %}
+                            🟢
+                        {% else %}
+                            🔴  
+                        {% endif %}
+                    </td>
+                    {% comment %} <td>{{ tipo.fone_res }}</td> {% endcomment %}
+                    {% comment %} <td>{{ tipo.nm_resp }}</td> {% endcomment %}
+                    {% comment %} <td>{{ tipo.login }}</td> {% endcomment %}
+                    <td>{{ tipo.id_perfil.descricao }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-info" onclick="location.href='{% url 'altera-pessoas'  id=tipo.id %}'">✏</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <label>Total de registros: {{ total }}</label>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        {% include 'paginacao.html' %}
+        {% elif procura %}
+            {% include 'sem_registro_encontrado.html' %}
+        {% else %}
+            {% include 'sem_item_cadastrado.html' %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Alteração de Lançamentos  </label>
+            </h3>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="Id" class="form-label">ID</label>
+            <input type="text" class="form-control" name="id" value="{{ lancamento.id }}" id="id" maxlength="2" minlength="2" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="tipo">Tipo</label>        
+                    <select class="form-control" name="tipo" id="perfil">
+                        <option value="0">Selecione o tipo</option>
+                        {% for tipo in tipo %}
+                            <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
+                        {% endfor %}
+                </select> 
+        </div>
+        <div class="form-group col-md-2">
+            <label for="descricao" class="form-label">Descrição</label>
+            <input type="text" class="form-control" name="descricao" value="{{ lancamento.descricao }}" id="descricao" maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="valor " class="form-label">Valor</label>
+            <input type="text" class="form-control" name="valor " value="{{ lancamento.valor  }}" id="valor " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dt_lancamento " class="form-label">Data Lançamento</label>
+            <input type="date" class="form-control" name="dt_lancamento " value="{{ lancamento.dt_lancamento  }}" id="dt_lancamento " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id_pessoa_id " class="form-label">ID Pessoa</label>
+            <input type="text" class="form-control" name="id_pessoa_id " value="{{ lancamento.id_pessoa_id  }}" id="id_pessoa_id " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="is_active">
+                Ativo?
+                <span style="color: red;">*</span></label>
+                <select class="form-control" name="is_active" id="is_active">
+                {% if pessoas.is_active %}
+                    <option value="True">Ativo</option>
+                    <option value="False">Inativo</option>
+                {% else %}
+                    <option value="False">Inativo</option>
+                    <option value="True">Ativo</option>
+                {% endif %}
+            </select>
+        </div>
+        {% include 'acoes_form_altera.html' %}
+        
+    </form>
+</div>
+   
+
+{% endblock %}

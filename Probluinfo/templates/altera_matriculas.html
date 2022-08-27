@@ -1,0 +1,78 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Alteração de Matriculas {{ matriculas.id_pessoa_id }} </label>
+            </h3>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" class="form-control" name="id  " value="{{ matriculas.id }}" id="id  " maxlength="2" minlength="2" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dt_inicio" class="form-label">Data Inicio</label>
+            <input type="date" class="form-control" name="dt_inicio " value="{{ matriculas.dt_inicio }}" id="dt_inicio  " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dt_fim" class="form-label">Data Fim</label>
+            <input type="date" class="form-control" name="dt_fim  " value="{{ matriculas.dt_fim  }}" id="dt_fim  " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="qtd_dias" class="form-label">Qtd Dias</label>
+            <input type="text" class="form-control" name="qtd_dias  " value="{{ matriculas.qtd_dias  }}" id="qtd_dias  " maxlength="2" minlength="2" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="qtd_horas  " class="form-label">Qtd Horas</label>
+            <input type="text" class="form-control" name="qtd_horas  " value="{{ matriculas.qtd_horas  }}" id="qtd_horas  " maxlength="2" minlength="2" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="periodo">Periodo</label>
+            <span style="color: red;">*</span></label>
+            <div class="form-group col-md-10">
+                <label for="perfil">
+                <select class="form-control" name="periodo" id="periodo">
+                        <option value="0">Selecione o Periodo</option>
+                    {% for periodo in periodos %}
+                        <option value="{{ periodo.0 }}">{{ periodo.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id_curso_id  " class="form-label"> ID Curso</label>
+            <input type="text" class="form-control" name="id_curso_id  " value="{{ matriculas.id_curso_id  }}" id="id_curso_id  " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id_pessoa_id  " class="form-label"> ID Pessoa</label>
+            <input type="text" class="form-control" name="id_pessoa_id  " value="{{ matriculas.id_pessoa_id  }}" id="id_pessoa_id  " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="id_sala_id  " class="form-label">ID Sala</label>
+            <input type="text" class="form-control" name="id_sala_id  " value="{{ matriculas.id_sala_id  }}" id="id_sala_id  " maxlength="50" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="is_active">
+                Ativo?
+                <span style="color: red;">*</span></label>
+                <select class="form-control" name="is_active" id="is_active">
+                {% if pessoas.is_active %}
+                    <option value="True">Ativo</option>
+                    <option value="False">Inativo</option>
+                {% else %}
+                    <option value="False">Inativo</option>
+                    <option value="True">Ativo</option>
+                {% endif %}
+            </select>
+        </div>
+        
+        {% include 'acoes_form_altera.html' %}
+        
+    </form>
+</div>
+   
+
+{% endblock %}
