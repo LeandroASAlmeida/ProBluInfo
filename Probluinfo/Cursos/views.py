@@ -4,7 +4,7 @@ from django.db import transaction
 from django.contrib import messages
 
 from Cursos.forms import FormCursos,FormMatriculas,FormNotas,FormSalas
-from Cursos.models import Matriculas,Cursos,Salas
+from Cursos.models import Matriculas,Cursos,Salas,Notas
 from ViewsProject.views import efetua_paginacao
 
 # Create your views here.
@@ -66,21 +66,37 @@ def lista_matriculas(request):
     procura = request.GET.get('procura')
 
     if procura:
-        matricula = Matriculas.objects.filter(nome__icontains=procura)|Matriculas.objects.filter(email__icontains=procura)
+        matriculas = Matriculas.objects.filter(nome__icontains=procura)
     else:
-        matricula = Matriculas.objects.all()
+        matriculas = Matriculas.objects.all()
 
-    total = matricula.count
+    total = matriculas.count
 
     dados = {
-                'matricula' : matricula, 
+                'matriculas' : matriculas, 
                 'total' : total, 
                 'procura' : procura,
             }
     return render(request, 'lista_matriculas.html', dados)
 
 def lista_notas(request):
-    return render(request,'lista_notas.html')
+    procura= request.GET.get('procura')
+    
+    if procura:
+        notas = Notas.objects.filter(nm_sala__icontains=procura)
+    else:
+        notas = Notas.objects.all()
+    
+    total = notas.count
+
+    dados = {
+                'notas' : notas,
+                'total' : total, 
+                'procura' : procura,
+                'porPagina' : efetua_paginacao(request, notas)
+            }
+
+    return render(request,'lista_notas.html',dados)
 
 def lista_salas(request):
     procura= request.GET.get('procura')
@@ -122,10 +138,43 @@ def altera_cursos(request,id):
     return render(request,'altera_cursos.html', dados)
 
 def altera_matriculas(request):
-    return render(request,'altera_matriculas.html')
+    matriculas = Matriculas.objects.get(id=id)
+    if request.method == 'POST':
+        form = FormMatriculas(request.POST,instance=matriculas)
+        if form.is_valid():
+            print(form.cleaned_data)
+            try:
+                with transaction.atomic():
+                    form.save()
+            except Exception as error:
+                print(error)
+            return redirect(lista_matriculas)
+    else:
+        form = FormMatriculas()
+    dados = {
+                'matriculas' : matriculas,
+            }
+
+    return render(request,'altera_matriculas.html', dados)
 
 def altera_notas(request):
-    return render(request,'altera_notas.html')
+    notas = Notas.objects.get(id=id)
+    if request.method == 'POST':
+        form = FormNotas(request.POST,instance=notas)
+        if form.is_valid():
+            print(form.cleaned_data)
+            try:
+                with transaction.atomic():
+                    form.save()
+            except Exception as error:
+                print(error)
+            return redirect(lista_notas)
+    else:
+        form = FormNotas()
+    dados = {
+                'notas' : notas,
+            }
+    return render(request,'altera_notas.html', dados)
 
 @transaction.atomic
 def altera_salas(request,id):
@@ -147,7 +196,13 @@ def altera_salas(request,id):
             }
     return render(request,'altera_salas.html', dados)
 
-
+@transaction.atomic
+def exclui_cursos(request,id):
+    cursos = Cursos.objects.get(id=id)
+    if request.method == 'POST':
+        cursos.delete()
+        return redirect(lista_cursos)
+    return render(request, 'exclui_cursos.html', {'cursos' : cursos})
 
 
 

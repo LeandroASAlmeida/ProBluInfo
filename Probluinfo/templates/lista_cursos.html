@@ -27,6 +27,8 @@
                     <td>{{ curso.vl_curso }}</td>
                     <td class="text-center">
                     <button class="btn btn-info" onclick="location.href='{% url 'altera-cursos'  id=curso.id %}'">✏</button>
+                    <button class="btn btn-danger" onclick="location.href='{% url 'exclui-cursos'  id=curso.id %}'">❌</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

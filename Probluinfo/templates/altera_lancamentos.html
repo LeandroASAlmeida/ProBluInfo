@@ -6,7 +6,7 @@
         {% csrf_token %}
         <div class="text-center">
             <h3>
-                <label class="text-dark">Alteração de Lançamentos  </label>
+                <label class="text-dark">Alteração de Lançamentos {{ lancamentos.descricao }}  </label>
             </h3>
         </div>
         <div class="form-group col-md-2">
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group col-md-2">
             <label for="dt_lancamento " class="form-label">Data Lançamento</label>
-            <input type="date" class="form-control" name="dt_lancamento " value="{{ lancamento.dt_lancamento  }}" id="dt_lancamento " maxlength="50" required>
+            <input type="date" class="form-control" name="dt_lancamento " value={{ data_lan }} id="dt_lancamento " maxlength="50" required>
         </div>
         <div class="form-group col-md-2">
             <label for="id_pessoa_id " class="form-label">ID Pessoa</label>
@@ -53,9 +53,49 @@
             </select>
         </div>
         {% include 'acoes_form_altera.html' %}
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Alterar registro</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente alterar <strong>{{ lancamentos.descricao }} </strong>?
+                </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Alterar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
+        {% include 'acoes_form_exclui.html' %}
+        <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title text-light" id="exampleModalLabel">Excluir Registro</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Deseja Realmente excluir <strong>{{ lancamentos.descricao }} </strong>?
+                    </div>
+                    <form action="{% url 'post_delete' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-footer">
+                            <button type="submit" value='Deletar post' class="btn btn-danger" data-bs-dismiss="modal">Sim</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
-   
+{% load static %}
 
 {% endblock %}

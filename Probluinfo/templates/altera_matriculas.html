@@ -68,11 +68,49 @@
                 {% endif %}
             </select>
         </div>
-        
         {% include 'acoes_form_altera.html' %}
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Alterar registro</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente alterar <strong>{{ matriculas.id_pessoa_id }}</strong>?
+                </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-warning" data-bs-dismiss="modal">Alterar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
+        {% include 'acoes_form_exclui.html' %}
+        <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title text-light" id="exampleModalLabel">Excluir Registro</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Deseja Realmente excluir <strong>{{ matriculas.id_pessoa_id }}</strong>?
+                    </div>
+                    <form action="{% url 'post_delete' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="modal-footer">
+                            <button type="submit" value='Deletar post' class="btn btn-danger" data-bs-dismiss="modal">Sim</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
-   
-
+{% load static %}
 {% endblock %}

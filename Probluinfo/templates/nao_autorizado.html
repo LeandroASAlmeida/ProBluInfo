@@ -1,7 +1,29 @@
-{% extends 'base_pbi.html' %}
-{% load static %}
+{% load static  %}
+<!doctype html>
+<html lang="pt-br" class="h-100">
+<head>
+    {% block titulo %}<title>ProBluInfo</title>{% endblock %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block corpo %}
+    <!-- Icones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Css Bootstrap e Manual -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% if request.session.base == "pdv" %}
+    <link rel="stylesheet" href="{% static 'css/pbi_pdv.css' %}">
+    {% else %}
+    <link rel="stylesheet" href="{% static 'css/pbi_gestao.css' %}">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    
+    <!-- Javascript Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+{% block conteudo %}
 <div id='oopss'>
     <div id='error-text'>
         <img src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="401">
@@ -12,7 +34,9 @@
         <p class="p-b">Confira o endereço da Web (URL) na barra de endereço para certificar-se de que esteja acessando a
             página da Web correta.
         <p>
-            <a href="{% url 'base_gestao' %}" class="back">Volte para o Inicio clicando aqui👀</a>
+            <a href="{% url 'base_pbi' %}" class="back">Volte para o Inicio clicando aqui👀</a>
     </div>
 </div>
+
+
 {% endblock %}

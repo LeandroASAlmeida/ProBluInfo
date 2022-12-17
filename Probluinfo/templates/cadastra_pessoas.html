@@ -16,7 +16,7 @@
 <div class="container bg-light back02">
     <form method="POST" class="form-group" name="pessoas_form">
         {% csrf_token %}
-        <!-- Identificação -->
+        
         <div class="form-row">
             <div class="form-group col-md-4 mt-4">
                 <div>
@@ -39,7 +39,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="cpf">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" />
+                <input type="text" class="form-control" id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" required />
             </div>
         </div>
         <!-- Contatos -->
@@ -111,16 +111,6 @@
             </div>
         </div>
         {% include 'acoes_form.html' %}
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <div class="alert alert-{% if message.tags == erro %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
-                    <strong>{{ message }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endfor %}
-            </ul>
-        {% endif %}
     </form>
 </div>
     

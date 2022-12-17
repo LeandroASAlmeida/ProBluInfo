@@ -1,0 +1,72 @@
+{% load static  %}
+<!doctype html>
+<html lang="pt-br" class="h-100">
+<head>
+    {% block titulo %}<title>ProBluInfo</title>{% endblock %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Css Bootstrap e Manual -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% if request.session.base == "pdv" %}
+    <link rel="stylesheet" href="{% static 'css/pbi_pdv.css' %}">
+    {% else %}
+    <link rel="stylesheet" href="{% static 'css/pbi_gestao.css' %}">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    
+    <!-- Javascript Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" class="form" autocomplete="off">
+    {% csrf_token %}
+
+<body class="bg-light">
+    <div id='error-text'>
+        <img src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="404">
+        <br>
+        <span>404 ERROR PAGE</span>
+        <p class="p-a">Esta página da Web não está disponível</p>
+        <p class="p-a">Caso não consiga acessar a página da Web em nenhum computador, verifique se você está conectado à
+            Internet. Se estiver, a página da Web pode estar fora do ar.</p>
+        <p class="p-b">Confira o endereço da Web (URL) na barra de endereço para certificar-se de que esteja acessando a
+            página da Web correta.
+        <p>
+            <a href="{% url 'login' %}">Volte para o Inicio clicando aqui👀</a>
+    </div>
+        <footer class="mt-auto">
+        <!-- Rodapé -->
+        <div class="container-fluid bg-light text-center p-3">
+            <div class="row">
+                <div class="col-md-4 mx-auto text-center">
+                    <img src="{% static 'img/logo.png' %}" height="68" class="float-left" alt="">
+                    <p>
+                        <span class="lead">PROBLUINFO</span><br>
+                        <span>Desenvolvido pela Equipe SuperDev2021</span>
+                    </p>
+                </div>
+            </div>
+        </div>     
+        </footer>
+ 
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="{% static 'js/app.js' %}"></script>
+</body>
+{% endblock %}

@@ -32,6 +32,7 @@ from Pessoas.models import Perfis
 from Pessoas.forms import FormPessoasAltera
 
 
+
 # Create your views here.
 
 def efetua_paginacao(request, registros):
@@ -53,11 +54,6 @@ def login(request):
         return redirect('base-pbi')
     else:                
         return render(request,'login.html')
-
-
-def login_view(request):
-        return render(request,'login.html')
-
 
 def login_view(request):
         if request.method=='POST':
@@ -81,16 +77,9 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, 'logged_out.html')
-        
 
-def pagina_inexistente(request, *args, **argv):# precisa ser exception
-    return render(request, 'pagina_inexistente.html',status=404)
-
-def nao_autorizado(request, *args, **argv):  # precisa ser exception
-    return render(request, 'nao_autorizado.html',status=401)
-
-def erro_servidor(request, *args, **argv):
-    return render(request, 'erro_servidor.html', status=500)
+def base_pbi(request):
+    return render(request, 'base_pbi.html')  
 
 def suporte(request):
     if request.method == "POST":
@@ -101,10 +90,6 @@ def suporte(request):
         except BadHeaderError:
             messages.warning(request,'Contato não Enviado!')
     return render(request, 'suporte.html')
-
-def base_pbi(request):
-    return render(request, 'base_pbi.html')
-
 
 @transaction.atomic
 def atualizar_dados(request):
@@ -167,6 +152,6 @@ def altera_senha(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'altera_senha.html', {'form': form})
 
-
 def sobre(request):
     return render(request, 'sobre.html')
+

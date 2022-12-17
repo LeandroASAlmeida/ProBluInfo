@@ -2,12 +2,23 @@
 
 {% block conteudo %}
 <div class="container bg-light back02">
-    <form method="POST" class="form-group" name="lancamentos_form" >
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="POST" class="form-group" action="">
         {% csrf_token %}
 
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <div>
+        <div class="container bg-light back02">
+            <form method="POST" class="form-group" name="lancamentos_form">
+                {% csrf_token %}
+              
+                <div class="form-row">
+                    <div class="form-group col-md-4 mt-4">
+                        <div>
                     <h4> Cadastrar Lançamentos </h4>
                 </div>
             </div>
@@ -44,7 +55,16 @@
             </div>
         </div>
         {% include 'acoes_form.html' %}
-    </div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == erro %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </form>
 </div>
 {% endblock %}

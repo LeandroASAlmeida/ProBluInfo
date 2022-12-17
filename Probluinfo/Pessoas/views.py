@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
@@ -21,6 +21,7 @@ def cadastra_pessoas(request):
                     formPessoa.cleaned_data['password'] = make_password(formPessoa.cleaned_data['password'])
                     Pessoas.objects.create(**formPessoa.cleaned_data)
                     messages.success(request, 'Cadastrado com sucesso!')
+                    return redirect(cadastra_pessoas)
             except Exception as error:
                 print(error)
             return redirect(lista_pessoas)
@@ -79,3 +80,19 @@ def altera_pessoas(request,id):
             }
     return render(request, 'altera_pessoas.html', dados)
    
+@transaction.atomic
+def exclui_pessoas(request,id):
+    pessoas = Pessoas.objects.get(id=id)
+    data_nas = pessoas.dt_nascimento
+    idade = datetime.now().year - data_nas.year
+    data_nas = data_nas.strftime('%Y-%m-%d')
+    dados = {
+                'pessoas' : pessoas,
+                'data_nas': data_nas,
+                'idade' : idade
+            }
+
+    if request.method == 'POST':
+        pessoas.delete()
+        return redirect(lista_pessoas)
+    return render(request, 'exclui_pessoas.html', dados)

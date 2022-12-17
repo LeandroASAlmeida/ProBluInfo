@@ -5,13 +5,15 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views
-from ViewsProject.views import login
 from django.contrib.auth import views as auth_views
 from core import views
+from ViewsProject import views
+from .views import login
 
 from Cursos.views import cadastra_cursos,cadastra_salas,cadastra_notas,cadastra_matriculas
 from Cursos.views import lista_cursos,lista_salas,lista_notas,lista_matriculas
 from Cursos.views import altera_cursos,altera_salas,altera_notas,altera_matriculas
+from Cursos.views import exclui_cursos
 
 
 from Financeiro.views import cadastra_lancamentos
@@ -22,10 +24,12 @@ from Financeiro.views import altera_lancamentos
 from Pessoas.views import cadastra_pessoas
 from Pessoas.views import lista_pessoas
 from Pessoas.views import altera_pessoas
+from Pessoas.views import exclui_pessoas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',views.login,name='login/'),
+
 
     # Path Altera
     path('altera-pessoas/<int:id>',altera_pessoas,name='altera-pessoas'),
@@ -51,6 +55,11 @@ urlpatterns = [
     path('lista-matriculas',lista_matriculas, name='lista-matriculas'),
     path('lista-lancamentos',lista_lancamentos, name='lista-lancamentos'),
 
+     # Path Exclui
+    path('exclui-pessoas/<int:id>', exclui_pessoas,name='exclui-pessoas'),
+    path('exclui-cursos/<int:id>', exclui_cursos,name='exclui-cursos'),
+
+
     path('accounts/',include('django.contrib.auth.urls')),
     path("",include('ViewsProject.urls')),
 
@@ -59,7 +68,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
 ]
-handler404 = 'ViewsProject.views.pagina_inexistente'
-handler500 = 'ViewsProject.views.erro_servidor'
-handler400 = 'ViewsProject.views.nao_autorizado'
+handler404 = 'core.views.pagina_inexistente'
+handler400 = 'core.views.nao_autorizado'
+
 

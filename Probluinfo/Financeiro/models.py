@@ -14,7 +14,7 @@ class Caixa(models.Model):
     tipo = models.CharField(max_length=1,choices=TIPOS_CHOICES, blank=False)
     descricao = models.CharField(max_length=50, blank=False)
     valor = models.DecimalField(max_digits=8, decimal_places=2,blank=True)
-    dt_lancamento = models.DateField(auto_now=True)
+    dt_lancamento = models.DateField(max_length=10, blank=False)
     id_pessoa = models.ForeignKey(Pessoas, on_delete=models.PROTECT)
 
     class Meta:

@@ -1,0 +1,70 @@
+{% extends 'base_pbi.html' %}
+{% block conteudo %}
+
+<div class="container bg-light back02">
+    <form method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h3>
+                <label class="text-dark">Exclusão de Curso {{ cursos.nm_curso }} </label>
+            </h3>
+        </div>
+        <div class="mb-3">
+            <label for="nm_curso" class="form-label">Nome</label>
+            <input type="text" class="form-control" name="nm_curso" value="{{ cursos.nm_curso }}" id="nm_curso" maxlength="50"  required>
+        </div>
+        <div class="mb-3">
+            <label for="carga_horaria" class="form-label">Carga Horaria</label>
+            <input type="text" class="form-control" name="carga_horaria" value="{{ cursos.carga_horaria }}" id="carga_horaria" required>
+        </div>
+        <div class="mb-3">
+            <label for="vl_curso" class="form-label">Valor do Curso</label>
+            <input type="text" class="form-control" name="vl_curso" value="{{ cursos.vl_curso }}" id="vl_curso" maxlength="50" required>
+        </div>
+        {% include 'acoes_form_exclui.html' %}
+    </form>
+    <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Excluir Registro</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja Realmente excluir o Curso de <label class="text-danger">{{ cursos.nm_curso }}</label>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Sim</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                    </div>
+                </form>
+                <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger">
+                                <h5 class="modal-title text-light" id="exampleModalLabel">Excluir Registro</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Deseja Realmente excluir o Usuario <label class="text-danger">{{ usuario.nome }}</label>
+                            </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Sim</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
