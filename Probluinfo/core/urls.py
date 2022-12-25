@@ -13,7 +13,7 @@ from .views import login
 from Cursos.views import cadastra_cursos,cadastra_salas,cadastra_notas,cadastra_matriculas
 from Cursos.views import lista_cursos,lista_salas,lista_notas,lista_matriculas
 from Cursos.views import altera_cursos,altera_salas,altera_notas,altera_matriculas
-from Cursos.views import exclui_cursos
+from Cursos.views import exclui_cursos,exclui_salas
 
 
 from Financeiro.views import cadastra_lancamentos
@@ -25,6 +25,7 @@ from Pessoas.views import cadastra_pessoas
 from Pessoas.views import lista_pessoas
 from Pessoas.views import altera_pessoas
 from Pessoas.views import exclui_pessoas
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -58,6 +59,7 @@ urlpatterns = [
      # Path Exclui
     path('exclui-pessoas/<int:id>', exclui_pessoas,name='exclui-pessoas'),
     path('exclui-cursos/<int:id>', exclui_cursos,name='exclui-cursos'),
+    path('exclui-salas/<int:id>', exclui_salas,name='exclui-salas'),
 
 
     path('accounts/',include('django.contrib.auth.urls')),

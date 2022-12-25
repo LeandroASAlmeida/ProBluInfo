@@ -204,6 +204,14 @@ def exclui_cursos(request,id):
         return redirect(lista_cursos)
     return render(request, 'exclui_cursos.html', {'cursos' : cursos})
 
+@transaction.atomic
+def exclui_salas(request,id):
+    salas = Salas.objects.get(id=id)
+    if request.method == 'POST':
+        salas.delete()
+        return redirect(lista_cursos)
+    return render(request, 'exclui_salas.html', {'salas' : salas})
+
 
 
 

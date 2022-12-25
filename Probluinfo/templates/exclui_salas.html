@@ -6,20 +6,16 @@
         {% csrf_token %}
         <div class="text-center">
             <h3>
-                <label class="text-dark">Exclusão de Curso {{ cursos.nm_curso }} </label>
+                <label class="text-dark">Alteração de Salas {{ salas.nm_sala }} </label>
             </h3>
         </div>
         <div class="mb-3">
-            <label for="nm_curso" class="form-label">Nome</label>
-            <input type="text" class="form-control" name="nm_curso" value="{{ cursos.nm_curso }}" id="nm_curso" maxlength="50"  disabled>
+            <label for="nm_sala" class="form-label">Nome da Sala</label>
+            <input type="text" class="form-control" name="nm_sala" value="{{ salas.nm_sala }}" id="nm_sala" maxlength="50" disabled>
         </div>
         <div class="mb-3">
-            <label for="carga_horaria" class="form-label">Carga Horaria</label>
-            <input type="text" class="form-control" name="carga_horaria" value="{{ cursos.carga_horaria }}" id="carga_horaria" disabled>
-        </div>
-        <div class="mb-3">
-            <label for="vl_curso" class="form-label">Valor do Curso</label>
-            <input type="text" class="form-control" name="vl_curso" value="{{ cursos.vl_curso }}" id="vl_curso" maxlength="50" disabled>
+            <label for="capacidade" class="form-label">Capacidade</label>
+            <input type="text" class="form-control" name="capacidade" value="{{ salas.capacidade }}" id="capacidade" maxlength="50" disabled>
         </div>
         {% include 'acoes_form_exclui.html' %}
     </form>
@@ -32,7 +28,7 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Deseja Realmente excluir o Curso de <label class="text-danger">{{ cursos.nm_curso }}</label>
+                    Deseja Realmente excluir a sala <label class="text-danger">{{ salas.nm_sala }}</label>
                 </div>
                 <form method="post">
                     {% csrf_token %}

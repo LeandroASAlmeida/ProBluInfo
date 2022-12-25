@@ -27,6 +27,8 @@
                     <td>{{ sala.capacidade }}</td>
                     <td class="text-center">
                         <button class="btn btn-info" onclick="location.href='{% url 'altera-salas'  id=sala.id %}'">✏</button>
+                        <button class="btn btn-danger" onclick="location.href='{% url 'exclui-salas'  id=sala.id %}'">❌</button>
+
                 </tr>
                 {% endfor %}
             </tbody>

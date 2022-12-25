@@ -4,6 +4,7 @@ from Financeiro.forms import FormCaixa
 from django.db import transaction
 from django.views.decorators.http import require_POST
 from ViewsProject.views import efetua_paginacao
+from django.contrib import messages
 
 
 # Create your views here.
@@ -13,11 +14,24 @@ def cadastra_lancamentos(request):
         form = FormCaixa(request.POST or None)
         if form.is_valid():
             form.save()
-            return redirect(cadastra_lancamentos)
+            messages.success(request, 'Cadastrado com sucesso!')     
     dados = {
         'tipo':tipo,
     }
     return render(request,'cadastra_lancamentos.html',dados)
+
+  
+        
+
+
+
+
+
+
+
+
+
+
 
 def lista_lancamentos(request):
     procura = request.GET.get('procura')
