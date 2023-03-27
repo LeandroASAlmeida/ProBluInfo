@@ -24,14 +24,16 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-2">
-                <label for="tipo">Tipo</label>        
-                        <select class="form-control" name="tipo" id="perfil">
+            <div class="form-group col-md-6">
+                <label for="id_perfil">
+                    Tipo
+                    <span style="color: red;">*</span></label>
+                        <select class="form-control" name="id_perfil" id="id_perfil">
                             <option value="0">Selecione o tipo</option>
                             {% for tipo in tipo %}
-                                <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
+                            <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
                             {% endfor %}
-                    </select> 
+                        </select>
             </div>
             <div class="form-group col-md-3">
                 <label for="descricao">Descrição </label>
@@ -39,8 +41,11 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="valor">Valor </label>
-                <input type="text" class="form-control" id="valor" name="valor"  maxlength="50" placeholder="Digite o valor"  />
+                <input type="text" class="form-control" id="valor" name="valor"  maxlength="50" placeholder="Digite o valor R$0000,00" />
             </div>
+            {% for error in formPessoa.email.errors %}
+            <p class="help is-danger">{{ error }}</p>    
+            {% endfor %}
             <div class="form-group col-md-3">
                 <label for="dt_lancamento">Data do Lançamento</label>
                 <input type="date" class="form-control" id="dt_lancamento" name="dt_lancamento"  maxlength="50" placeholder="Digite a data do lançamento"  />

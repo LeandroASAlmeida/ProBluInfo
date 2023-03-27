@@ -8,6 +8,7 @@ from django.contrib import messages
 
 
 # Create your views here.
+@transaction.atomic
 def cadastra_lancamentos(request):
     tipo = Caixa.TIPOS_CHOICES
     if request.method == 'POST':
@@ -19,19 +20,6 @@ def cadastra_lancamentos(request):
         'tipo':tipo,
     }
     return render(request,'cadastra_lancamentos.html',dados)
-
-  
-        
-
-
-
-
-
-
-
-
-
-
 
 def lista_lancamentos(request):
     procura = request.GET.get('procura')

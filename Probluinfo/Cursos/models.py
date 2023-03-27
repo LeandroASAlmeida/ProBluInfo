@@ -7,7 +7,7 @@ from Pessoas.models import Pessoas
 class Cursos(models.Model):
     nm_curso = models.CharField(max_length=50,blank=False,unique=True)
     carga_horaria = models.DecimalField(default=1,max_digits=6,decimal_places=0,blank=False)
-    vl_curso = models.DecimalField(default=1,max_digits=6,decimal_places=0,blank=False)
+    vl_curso = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         db_table = 'Cursos'
